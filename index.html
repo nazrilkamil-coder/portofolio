@@ -187,6 +187,7 @@
                 <li><a href="#about" class="nav-item hover:text-rose-500 transition">Tentang</a></li>
                 <li><a href="#stats" class="nav-item hover:text-rose-500 transition">Stats</a></li>
                 <li><a href="#achievements" class="nav-item hover:text-rose-500 transition">Prestasi</a></li>
+                <li><a href="#gallery" class="nav-item hover:text-rose-500 transition">Galeri</a></li>
                 <li><a href="#contact" class="nav-item hover:text-rose-500 transition">Kontak</a></li>
             </ul>
             <!-- Mobile Menu Button (Placeholder) -->
@@ -194,7 +195,7 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- 1. HERO SECTION (Beranda) -->
     <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
         <!-- Slash Graphic -->
         <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#111] to-transparent transform skew-x-[-15deg] translate-x-32 -z-10 hidden md:block"></div>
@@ -228,12 +229,48 @@
                 <div class="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] border-2 border-rose-600/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
                 <div class="absolute w-[280px] h-[280px] md:w-[480px] md:h-[480px] border border-dashed border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
                 
-                <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-06%20at%2000.00.48.jpeg" alt="Nazril Kamil Fighter" class="relative z-10 w-full max-w-md object-cover rounded-2xl shard-image shadow-2xl drop-shadow-[0_20px_50px_rgba(225,29,72,0.3)]">
+                <!-- Fixed Image Link (changed from blob to raw) -->
+                <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-06%20at%2000.00.48.jpeg" alt="Nazril Kamil Fighter" class="relative z-10 w-full max-w-md object-cover rounded-2xl shard-image shadow-2xl drop-shadow-[0_20px_50px_rgba(225,29,72,0.3)]">
             </div>
         </div>
     </section>
 
-    <!-- STATS (HUD Style) -->
+    <!-- 2. ABOUT SECTION (Tentang Saya) -->
+    <!-- Dipindahkan ke urutan ke-2 agar sesuai flow LKPD -->
+    <section id="about" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-rose-600 transform translate-x-2 translate-y-2 transition group-hover:translate-x-0 group-hover:translate-y-0"></div>
+                        <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39.jpeg" class="relative z-10 w-full grayscale group-hover:grayscale-0 transition duration-500 border border-white/10">
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-5xl font-bold mb-6 heading-font">PERJALANAN <span class="outline-text text-white/20">SANG ATLET</span></h2>
+                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                        Sebagai siswa <strong class="text-white">SMAN 1 Subang</strong>, saya menyeimbangkan antara buku pelajaran dan sarung tinju. Dedikasi selama 3 tahun di dunia Muay Thai telah mengajarkan saya arti ketekunan.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">3+</div>
+                            <div class="text-xs text-gray-500 uppercase">Tahun Latihan</div>
+                        </div>
+                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">5+</div>
+                            <div class="text-xs text-gray-500 uppercase">Turnamen</div>
+                        </div>
+                            <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">100%</div>
+                            <div class="text-xs text-gray-500 uppercase">Dedikasi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. STATS (Keahlian) -->
     <section id="stats" class="skew-section bg-[#0f0f0f] relative z-20 border-t border-white/5 border-b border-white/5">
         <div class="skew-content container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-center">
@@ -315,41 +352,7 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION (Non-skewed) -->
-    <section id="about" class="py-24 relative">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/3">
-                    <div class="relative group">
-                        <div class="absolute inset-0 bg-rose-600 transform translate-x-2 translate-y-2 transition group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                        <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39.jpeg" class="relative z-10 w-full grayscale group-hover:grayscale-0 transition duration-500 border border-white/10">
-                    </div>
-                </div>
-                <div class="md:w-2/3">
-                    <h2 class="text-5xl font-bold mb-6 heading-font">PERJALANAN <span class="outline-text text-white/20">SANG ATLET</span></h2>
-                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
-                        Sebagai siswa <strong class="text-white">SMAN 1 Subang</strong>, saya menyeimbangkan antara buku pelajaran dan sarung tinju. Dedikasi selama 3 tahun di dunia Muay Thai telah mengajarkan saya arti ketekunan.
-                    </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
-                            <div class="text-3xl font-bold heading-font text-white">3+</div>
-                            <div class="text-xs text-gray-500 uppercase">Tahun Latihan</div>
-                        </div>
-                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
-                            <div class="text-3xl font-bold heading-font text-white">5+</div>
-                            <div class="text-xs text-gray-500 uppercase">Turnamen</div>
-                        </div>
-                         <div class="p-4 bg-white/5 border-l-2 border-rose-600">
-                            <div class="text-3xl font-bold heading-font text-white">100%</div>
-                            <div class="text-xs text-gray-500 uppercase">Dedikasi</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRESTASI / BATTLE LOG -->
+    <!-- 4. PRESTASI / BATTLE LOG -->
     <section id="achievements" class="py-24 bg-[#0a0a0a] border-t border-white/5">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -411,7 +414,7 @@
         </div>
     </section>
 
-    <!-- GALLERY (Grid) -->
+    <!-- 5. GALLERY (Grid) -->
     <section id="gallery" class="py-24 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 -z-10"></div>
         <div class="container mx-auto px-6">
@@ -431,13 +434,14 @@
                 </div>
                 <div class="overflow-hidden relative group h-80 border border-white/10 mt-12" data-aos="flip-left" data-aos-delay="300">
                     <div class="absolute inset-0 bg-rose-600/20 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay"></div>
-                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <!-- Fixed Image Link -->
+                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-06%20at%2000.00.48.jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT (CTA) -->
+    <!-- 6. CONTACT (CTA) -->
     <section id="contact" class="py-32 bg-gradient-to-t from-rose-900/20 to-black relative">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-6xl md:text-8xl font-bold heading-font mb-8" data-aos="zoom-in">SIAP <span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">BERTARUNG?</span></h2>
@@ -460,7 +464,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- 7. FOOTER -->
     <footer class="bg-black py-8 border-t border-white/10">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
             <div class="text-2xl font-bold heading-font text-white mb-4 md:mb-0">
@@ -498,4 +502,3 @@
     </script>
 </body>
 </html>
-
