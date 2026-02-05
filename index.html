@@ -3,337 +3,498 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athlete Profile | Nazril Kamil - SMAN 1 Subang</title>
+    <title>The Fighter | Nazril Kamil - SMAN 1 Subang</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Library for Scroll Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,700&family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;600;700&family=Rajdhani:wght@500;700&display=swap');
 
         :root {
-            --primary: #e11d48;
-            --dark: #0f172a;
+            --primary: #ff003c; /* Cyberpunk Red */
+            --dark: #050505;
+            --gray: #1a1a1a;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #020617;
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark);
             color: white;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .stat-label {
-            font-family: 'Barlow Condensed', sans-serif;
+        /* Texture Overlay for Gritty Look */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, .heading-font {
+            font-family: 'Teko', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            line-height: 0.9;
         }
 
-        /* Custom Animated Background */
-        .bg-gradient-animate {
-            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #450a0a, #020617);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+        /* Dynamic Outline Text */
+        .outline-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            color: transparent;
+            font-family: 'Teko', sans-serif;
+            font-weight: 700;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Skewed Sections */
+        .skew-section {
+            transform: skewY(-3deg);
+            padding: 6rem 0;
+            margin: -3rem 0;
+        }
+        
+        .skew-content {
+            transform: skewY(3deg); /* Counter skew for content */
         }
 
-        .hero-clip {
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+        /* HUD Style Stats */
+        .hud-box {
+            background: rgba(25, 25, 25, 0.8);
+            border: 1px solid #333;
+            border-left: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
         }
 
-        /* Glow Effect */
-        .glow-hover:hover {
-            box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+        .hud-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, transparent 50%, var(--primary) 50%);
+        }
+
+        .hud-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 60, 0.2);
+            border-color: var(--primary);
+        }
+
+        /* Custom Progress Bar (Health Bar Style) */
+        .health-bar-container {
+            background: #111;
+            height: 12px;
+            transform: skewX(-20deg);
+            border: 1px solid #333;
+        }
+        
+        .health-bar-fill {
+            background: linear-gradient(90deg, #ff003c, #ff4d79);
+            height: 100%;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .health-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: white;
+            opacity: 0.7;
+        }
+
+        /* Image Shard Effect */
+        .shard-image {
+            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+            transition: all 0.5s ease;
+            filter: grayscale(80%) contrast(120%);
+        }
+
+        .shard-image:hover {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            filter: grayscale(0%) contrast(100%);
             transform: scale(1.02);
         }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Nav Link Animation */
+        .nav-item {
+            position: relative;
         }
-
-        .stat-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .stat-card:hover {
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
             background: var(--primary);
-            transform: translateY(-10px);
+            transition: width 0.3s ease;
+            transform: skewX(-20deg);
+        }
+        .nav-item:hover::before {
+            width: 100%;
         }
 
-        /* Progress Bar Animation */
-        .progress-fill {
-            transition: width 2s cubic-bezier(0.65, 0, 0.35, 1);
+        /* Red Glow Pulse */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 0, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0); }
         }
 
-        /* Floating Animation */
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        .btn-pulse {
+            animation: pulse-red 2s infinite;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-rose-600 selection:text-white">
 
-    <!-- Navigasi -->
-    <header class="fixed w-full z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Background Decorative Elements -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden">
+        <div class="absolute top-20 right-[-10%] text-[20vw] outline-text opacity-5 select-none rotate-12">MUAY</div>
+        <div class="absolute bottom-[-10%] left-[-5%] text-[20vw] outline-text opacity-5 select-none -rotate-6">THAI</div>
+        <div class="absolute w-96 h-96 bg-rose-600 rounded-full blur-[150px] opacity-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-extrabold italic tracking-tighter text-white">
-                NZR<span class="text-rose-600">KAMIL</span>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-rose-600 flex items-center justify-center transform skew-x-[-10deg]">
+                    <span class="font-bold text-white transform skew-x-[10deg]">N</span>
+                </div>
+                <div class="text-2xl font-bold tracking-tighter heading-font text-white">
+                    NAZRIL<span class="text-rose-600">KAMIL</span>
+                </div>
             </div>
-            <ul class="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
-                <li><a href="#home" class="hover:text-rose-600 transition duration-300">Profil</a></li>
-                <li><a href="#stats" class="hover:text-rose-600 transition duration-300">Statistik</a></li>
-                <li><a href="#achievements" class="hover:text-rose-600 transition duration-300">Prestasi</a></li>
-                <li><a href="#gallery" class="hover:text-rose-600 transition duration-300">Galeri</a></li>
-                <li><a href="#contact" class="hover:text-rose-600 transition duration-300">Kontak</a></li>
+            <ul class="hidden md:flex space-x-8 text-sm font-bold tracking-widest uppercase">
+                <li><a href="#home" class="nav-item hover:text-rose-500 transition">Beranda</a></li>
+                <li><a href="#about" class="nav-item hover:text-rose-500 transition">Tentang</a></li>
+                <li><a href="#stats" class="nav-item hover:text-rose-500 transition">Stats</a></li>
+                <li><a href="#achievements" class="nav-item hover:text-rose-500 transition">Prestasi</a></li>
+                <li><a href="#contact" class="nav-item hover:text-rose-500 transition">Kontak</a></li>
             </ul>
+            <!-- Mobile Menu Button (Placeholder) -->
+            <button class="md:hidden text-2xl text-rose-600"><i class="fas fa-bars"></i></button>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-clip min-h-screen bg-gradient-animate flex items-center pt-20 relative">
-        <div class="container mx-auto px-6 z-10 grid md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right" data-aos-duration="1000">
-                <span class="inline-block px-4 py-1 bg-rose-600/20 border border-rose-600/50 text-rose-500 text-xs font-bold mb-6 tracking-[0.3em] rounded-full">
-                    SMAN 1 SUBANG • ATHLETE
-                </span>
-                <h1 class="text-7xl md:text-9xl font-black italic leading-[0.85] mb-6">
-                    FIGHT <br> <span class="text-rose-600">SMARTER.</span>
+    <!-- HERO SECTION -->
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <!-- Slash Graphic -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#111] to-transparent transform skew-x-[-15deg] translate-x-32 -z-10 hidden md:block"></div>
+
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="order-2 md:order-1" data-aos="fade-right">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="h-[2px] w-12 bg-rose-600"></span>
+                    <span class="text-rose-500 font-bold tracking-[0.3em] text-sm uppercase">SMAN 1 Subang Athlete</span>
+                </div>
+                <h1 class="text-7xl md:text-9xl font-bold italic mb-2 leading-[0.85]">
+                    UNLEASH <br> THE <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-rose-400">BEAST</span>
                 </h1>
-                <p class="text-slate-400 text-lg mb-8 max-w-md leading-relaxed">
-                    Menyeimbangkan disiplin akademik di <span class="text-white font-bold">SMAN 1 Subang</span> dengan dedikasi tinggi di atas ring Muay Thai. Melatih fisik, memperkuat mental.
+                <p class="text-gray-400 text-lg md:text-xl max-w-md mt-6 border-l-2 border-rose-600 pl-4">
+                    Disiplin tinggi. Teknik mematikan. Mental juara. 
+                    Membangun karakter melalui seni delapan tungkai.
                 </p>
-                <div class="flex gap-4">
-                    <a href="#stats" class="bg-rose-600 text-white px-10 py-4 font-bold text-sm glow-hover transition-all rounded-sm italic">
-                        LIHAT DATA FISIK
-                    </a>
-                </div>
-            </div>
-            <div class="relative flex justify-center" data-aos="zoom-in" data-aos-duration="1200">
-                <div class="floating relative z-10">
-                    <div class="absolute -inset-4 bg-rose-600 rounded-full blur-3xl opacity-20"></div>
-                    <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" alt="Nazril Kamil" class="relative rounded-2xl w-80 md:w-[450px] shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700">
-                </div>
-                <!-- Decorative Elements -->
-                <div class="absolute top-0 right-0 text-rose-600/20 text-9xl font-black -z-0 select-none">MUAY</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistik Section -->
-    <section id="stats" class="py-32 bg-[#020617] relative">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
-                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <span class="stat-label text-slate-400 text-xs block mb-2">Height</span>
-                    <h3 class="text-5xl font-bold italic">165<span class="text-sm">cm</span></h3>
-                </div>
-                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <span class="stat-label text-slate-400 text-xs block mb-2">Weight</span>
-                    <h3 class="text-5xl font-bold italic">48<span class="text-sm">kg</span></h3>
-                </div>
-                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <span class="stat-label text-slate-400 text-xs block mb-2">Division</span>
-                    <h3 class="text-5xl font-bold italic text-3xl">48</h3>
-                </div>
-                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="400">
-                    <span class="stat-label text-slate-400 text-xs block mb-2">Experience</span>
-                    <h3 class="text-5xl font-bold italic">3<span class="text-sm">yrs</span></h3>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-20 items-center">
-                <div data-aos="fade-right">
-                    <h2 class="text-5xl font-bold mb-10 italic tracking-tighter text-rose-600">FIGHT ANALYTICS</h2>
-                    <div class="space-y-10">
-                        <div class="skill-container">
-                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-                                <span>Striking Power</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                <div class="progress-fill h-full bg-rose-600" data-width="88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-container">
-                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-                                <span>Clinched Control</span>
-                                <span>82%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                <div class="progress-fill h-full bg-rose-600" data-width="82%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-container">
-                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-                                <span>Mental Fortitude</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                <div class="progress-fill h-full bg-rose-600" data-width="95%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-12 rounded-3xl relative overflow-hidden group" data-aos="fade-left">
-                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:rotate-12 transition duration-700">
-                        <i class="fas fa-graduation-cap text-8xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold mb-6 italic uppercase">Pendidikan</h3>
-                    <p class="text-rose-500 font-bold text-xl mb-4">SMAN 1 SUBANG</p>
-                    <p class="text-slate-400 leading-relaxed">
-                        Membuktikan bahwa prestasi olahraga dan tanggung jawab akademik dapat berjalan beriringan. Aktif sebagai mentor bela diri bagi adik-adik kelas di lingkungan sekolah dan sasana.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Prestasi Section -->
-    <section id="achievements" class="py-32 bg-slate-900/50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="text-6xl font-black italic">BATTLE <span class="text-rose-600">RECORDS</span></h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="100">
-                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2023</span>
-                    <h4 class="text-2xl font-bold mb-2 italic">One Day Muaythai Member Fight</h4>
-                    <p class="text-sm text-slate-400 group-hover:text-rose-100"></p
-                </div>
-                <!-- Card 2 -->
-                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2023</span>
-                    <h4 class="text-2xl font-bold mb-2 italic">Kejurprov 2025</h4>
-                    <p class="text-sm text-slate-400 group-hover:text-rose-100"></p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="300">
-                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2024</span>
-                    <h4 class="text-2xl font-bold mb-2 italic">BK Porprov 2025</h4>
-                    <p class="text-sm text-slate-400 group-hover:text-rose-100"></p>
-                </div>
-                <!-- Card 4 -->
-                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="300">
-                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2024</span>
-                    <h4 class="text-2xl font-bold mb-2 italic">Mandalajati Fight Series</h4>
-                    <p class="text-sm text-slate-400 group-hover:text-rose-100"></p>
-               </div>
-                    <!-- Card 5 -->
-                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="300">
-                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2024</span>
-                    <h4 class="text-2xl font-bold mb-2 italic">Phenom Cypher Chapter 18#</h4>
-                    <p class="text-sm text-slate-400 group-hover:text-rose-100"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-32 bg-[#020617]">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39.jpeg" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
-                </div>
-                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39%20(1).jpeg" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
-                </div>
-                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-05%20at%2011.28.38.jpeg" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
-                </div>
-                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="400">
-                    <img src="https://github.com/nazrilkamil-coder/portofolio/blob/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak Section -->
-    <section id="contact" class="py-32 bg-gradient-to-b from-[#020617] to-black">
-        <div class="container mx-auto px-6 text-center">
-            <div class="glass max-w-4xl mx-auto p-16 rounded-[4rem] relative overflow-hidden" data-aos="zoom-in">
-                <div class="absolute -top-24 -left-24 w-64 h-64 bg-rose-600 blur-[100px] opacity-20"></div>
-                <h2 class="text-5xl font-black italic mb-6">MULAI <span class="text-rose-600">BERLATIH.</span></h2>
-                <p class="text-slate-400 mb-12 max-w-sm mx-auto">Konsultasi jadwal latihan junior atau kolaborasi prestasi.</p>
                 
-                <div class="flex flex-col md:flex-row justify-center gap-6 items-center">
-                    <a href="https://wa.me/your-number" class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-rose-600 hover:text-white transition-all duration-300">
-                        <i class="fab fa-whatsapp text-xl"></i> WHATSAPP
+                <div class="mt-10 flex gap-6">
+                    <a href="#stats" class="group relative px-8 py-4 bg-rose-600 text-white font-bold uppercase tracking-wider overflow-hidden transform skew-x-[-10deg] btn-pulse transition hover:bg-rose-700">
+                        <span class="relative z-10 block transform skew-x-[10deg]">Lihat Stats</span>
                     </a>
-                    <a href="https://instagram.com/your-username" class="flex items-center gap-3 glass px-8 py-4 rounded-full font-bold hover:bg-rose-600 transition-all duration-300">
-                        <i class="fab fa-instagram text-xl"></i> INSTAGRAM
+                    <a href="#contact" class="group px-8 py-4 border border-white/20 hover:border-rose-600 text-white font-bold uppercase tracking-wider transform skew-x-[-10deg] transition bg-white/5 hover:bg-white/10">
+                        <span class="block transform skew-x-[10deg]">Hubungi</span>
                     </a>
                 </div>
-                <div class="mt-12 text-slate-500 text-sm font-medium">
-                    nazril.kamil@sma1subang.sch.id
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center relative" data-aos="zoom-in" data-aos-duration="1000">
+                <!-- Circle Graphic -->
+                <div class="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] border-2 border-rose-600/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                <div class="absolute w-[280px] h-[280px] md:w-[480px] md:h-[480px] border border-dashed border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" alt="Nazril Kamil Fighter" class="relative z-10 w-full max-w-md object-cover rounded-2xl shard-image shadow-2xl drop-shadow-[0_20px_50px_rgba(225,29,72,0.3)]">
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS (HUD Style) -->
+    <section id="stats" class="skew-section bg-[#0f0f0f] relative z-20 border-t border-white/5 border-b border-white/5">
+        <div class="skew-content container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Kiri: Attributes -->
+                <div data-aos="fade-right">
+                    <h2 class="text-5xl md:text-6xl mb-8 font-bold"><span class="text-rose-600">FIGHTER</span> ATTRIBUTES</h2>
+                    
+                    <div class="space-y-8">
+                        <!-- Stat 1 -->
+                        <div>
+                            <div class="flex justify-between mb-2 heading-font text-2xl">
+                                <span>STRIKING POWER</span>
+                                <span class="text-rose-500">88%</span>
+                            </div>
+                            <div class="health-bar-container">
+                                <div class="health-bar-fill" data-width="88%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stat 2 -->
+                        <div>
+                            <div class="flex justify-between mb-2 heading-font text-2xl">
+                                <span>CLINCH CONTROL</span>
+                                <span class="text-rose-500">82%</span>
+                            </div>
+                            <div class="health-bar-container">
+                                <div class="health-bar-fill" data-width="82%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Stat 3 -->
+                        <div>
+                            <div class="flex justify-between mb-2 heading-font text-2xl">
+                                <span>STAMINA / ENDURANCE</span>
+                                <span class="text-rose-500">95%</span>
+                            </div>
+                            <div class="health-bar-container">
+                                <div class="health-bar-fill" data-width="95%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-10">
+                        <div class="hud-box p-4 text-center">
+                            <i class="fas fa-ruler-vertical text-rose-500 text-2xl mb-2"></i>
+                            <div class="text-gray-400 text-xs uppercase tracking-widest">Height</div>
+                            <div class="text-3xl font-bold heading-font">165 <span class="text-lg text-gray-500">CM</span></div>
+                        </div>
+                        <div class="hud-box p-4 text-center">
+                            <i class="fas fa-weight-hanging text-rose-500 text-2xl mb-2"></i>
+                            <div class="text-gray-400 text-xs uppercase tracking-widest">Weight</div>
+                            <div class="text-3xl font-bold heading-font">48 <span class="text-lg text-gray-500">KG</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Image / Quote -->
+                <div class="relative" data-aos="fade-left">
+                    <div class="absolute -top-10 -left-10 text-9xl outline-text opacity-20 z-0">FOCUS</div>
+                    <div class="bg-gradient-to-br from-gray-900 to-black p-8 border border-white/10 relative z-10 transform rotate-2 hover:rotate-0 transition duration-500">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-600 to-transparent"></div>
+                        <i class="fas fa-quote-left text-4xl text-rose-600 mb-4 opacity-50"></i>
+                        <p class="text-2xl font-light italic leading-relaxed text-gray-300">
+                            "Muay Thai bukan hanya tentang menghancurkan lawan, tetapi tentang membangun <strong class="text-white">versi terbaik</strong> dari dirimu sendiri."
+                        </p>
+                        <div class="mt-6 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-rose-600">
+                                <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="font-bold uppercase tracking-widest text-sm">Nazril Kamil</div>
+                                <div class="text-xs text-rose-500">Student Athlete</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 bg-black text-center">
-        <div class="text-2xl font-black italic mb-4">NZR<span class="text-rose-600">KAMIL</span></div>
-        <p class="text-slate-600 text-[10px] tracking-[0.5em] uppercase font-bold">
-            Athlete Digital Profile • SMAN 1 SUBANG • © 2024
-        </p>
+    <!-- ABOUT SECTION (Non-skewed) -->
+    <section id="about" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-rose-600 transform translate-x-2 translate-y-2 transition group-hover:translate-x-0 group-hover:translate-y-0"></div>
+                        <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39.jpeg" class="relative z-10 w-full grayscale group-hover:grayscale-0 transition duration-500 border border-white/10">
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-5xl font-bold mb-6 heading-font">PERJALANAN <span class="outline-text text-white/20">SANG ATLET</span></h2>
+                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                        Sebagai siswa <strong class="text-white">SMAN 1 Subang</strong>, saya menyeimbangkan antara buku pelajaran dan sarung tinju. Dedikasi selama 3 tahun di dunia Muay Thai telah mengajarkan saya arti ketekunan.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">3+</div>
+                            <div class="text-xs text-gray-500 uppercase">Tahun Latihan</div>
+                        </div>
+                        <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">5+</div>
+                            <div class="text-xs text-gray-500 uppercase">Turnamen</div>
+                        </div>
+                         <div class="p-4 bg-white/5 border-l-2 border-rose-600">
+                            <div class="text-3xl font-bold heading-font text-white">100%</div>
+                            <div class="text-xs text-gray-500 uppercase">Dedikasi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESTASI / BATTLE LOG -->
+    <section id="achievements" class="py-24 bg-[#0a0a0a] border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-6xl font-bold heading-font">BATTLE <span class="text-rose-600">LOGS</span></h2>
+                <div class="h-1 w-24 bg-rose-600 mx-auto mt-2"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="hud-box p-8 group" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-trophy text-3xl text-yellow-500 group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded uppercase">Winner</span>
+                    </div>
+                    <h3 class="text-2xl font-bold italic mb-2 leading-tight">One Day Muaythai Member Fight</h3>
+                    <p class="text-sm text-gray-500">Menampilkan teknik striking yang dominan.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="hud-box p-8 group" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-medal text-3xl text-gray-400 group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded uppercase">Regional</span>
+                    </div>
+                    <h3 class="text-2xl font-bold italic mb-2 leading-tight">Kejurprov 2024/2025</h3>
+                    <p class="text-sm text-gray-500">Kompetisi tingkat provinsi yang ketat.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="hud-box p-8 group" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-fist-raised text-3xl text-rose-600 group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded uppercase">Selection</span>
+                    </div>
+                    <h3 class="text-2xl font-bold italic mb-2 leading-tight">BK Porprov 2025</h3>
+                    <p class="text-sm text-gray-500">Babak kualifikasi pekan olahraga provinsi.</p>
+                </div>
+
+                 <!-- Card 4 -->
+                 <div class="hud-box p-8 group" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-fire text-3xl text-orange-500 group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded uppercase">Series</span>
+                    </div>
+                    <h3 class="text-2xl font-bold italic mb-2 leading-tight">Mandalajati Fight Series</h3>
+                    <p class="text-sm text-gray-500">Pertarungan serial penuh aksi.</p>
+                </div>
+
+                 <!-- Card 5 -->
+                 <div class="hud-box p-8 group" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fas fa-star text-3xl text-purple-500 group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded uppercase">Elite</span>
+                    </div>
+                    <h3 class="text-2xl font-bold italic mb-2 leading-tight">Phenom Cypher Chapter 18#</h3>
+                    <p class="text-sm text-gray-500">Ajang bergengsi para petarung muda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY (Grid) -->
+    <section id="gallery" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 -z-10"></div>
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold mb-12 heading-font text-center">GALERI <span class="text-rose-600">AKSI</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="overflow-hidden relative group h-80 border border-white/10" data-aos="flip-left">
+                    <div class="absolute inset-0 bg-rose-600/20 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay"></div>
+                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39.jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                </div>
+                <div class="overflow-hidden relative group h-80 border border-white/10 mt-12" data-aos="flip-left" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-rose-600/20 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay"></div>
+                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.39%20(1).jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                </div>
+                <div class="overflow-hidden relative group h-80 border border-white/10" data-aos="flip-left" data-aos-delay="200">
+                    <div class="absolute inset-0 bg-rose-600/20 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay"></div>
+                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.28.38.jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                </div>
+                <div class="overflow-hidden relative group h-80 border border-white/10 mt-12" data-aos="flip-left" data-aos-delay="300">
+                    <div class="absolute inset-0 bg-rose-600/20 opacity-0 group-hover:opacity-100 transition z-10 mix-blend-overlay"></div>
+                    <img src="https://raw.githubusercontent.com/nazrilkamil-coder/portofolio/main/WhatsApp%20Image%202026-02-05%20at%2011.30.48.jpeg" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT (CTA) -->
+    <section id="contact" class="py-32 bg-gradient-to-t from-rose-900/20 to-black relative">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-6xl md:text-8xl font-bold heading-font mb-8" data-aos="zoom-in">SIAP <span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">BERTARUNG?</span></h2>
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+                Hubungi saya untuk kolaborasi latihan, sparring partner, atau diskusi teknik Muay Thai.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="#" class="px-10 py-5 bg-white text-black font-bold uppercase tracking-widest hover:bg-rose-600 hover:text-white transition transform hover:-translate-y-2 clip-button">
+                    WhatsApp
+                </a>
+                <a href="#" class="px-10 py-5 border border-white text-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition transform hover:-translate-y-2 clip-button">
+                    Instagram
+                </a>
+            </div>
+            
+            <div class="mt-16 text-sm text-gray-600 font-mono">
+                EMAIL: NAZRIL.KAMIL@SMAN1SUBANG.SCH.ID
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-8 border-t border-white/10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-2xl font-bold heading-font text-white mb-4 md:mb-0">
+                NZR<span class="text-rose-600">KAMIL</span>
+            </div>
+            <div class="text-gray-600 text-xs uppercase tracking-widest">
+                © 2024 Nazril Kamil • SMAN 1 Subang
+            </div>
+        </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
         AOS.init({
             duration: 800,
-            once: false,
-            mirror: true
+            once: true,
+            offset: 100
         });
 
-        // Skill Bar Animation on Scroll
-        const observerOptions = {
-            threshold: 0.5
-        };
-
+        // Stats Animation
+        const statsSection = document.getElementById('stats');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const fills = entry.target.querySelectorAll('.progress-fill');
-                    fills.forEach(fill => {
-                        fill.style.width = fill.getAttribute('data-width');
+                if(entry.isIntersecting) {
+                    const bars = document.querySelectorAll('.health-bar-fill');
+                    bars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width;
                     });
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
 
-        observer.observe(document.querySelector('#stats'));
-
-        // Header Transparency Change on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('bg-black/90');
-                header.classList.remove('bg-white/10');
-            } else {
-                header.classList.remove('bg-black/90');
-                header.classList.add('bg-white/10');
-            }
-        });
+        observer.observe(statsSection);
     </script>
 </body>
-
 </html>
-
