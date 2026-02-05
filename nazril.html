@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlete Profile | Nazril Kamil - SMAN 1 Subang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,700&family=Inter:wght@400;600;800&display=swap');
+
+        :root {
+            --primary: #e11d48;
+            --dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .stat-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Custom Animated Background */
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #450a0a, #020617);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-clip {
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+        }
+
+        /* Glow Effect */
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+            transform: scale(1.02);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stat-card:hover {
+            background: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        /* Progress Bar Animation */
+        .progress-fill {
+            transition: width 2s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigasi -->
+    <header class="fixed w-full z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold italic tracking-tighter text-white">
+                NZR<span class="text-rose-600">KAMIL</span>
+            </div>
+            <ul class="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
+                <li><a href="#home" class="hover:text-rose-600 transition duration-300">Profil</a></li>
+                <li><a href="#stats" class="hover:text-rose-600 transition duration-300">Statistik</a></li>
+                <li><a href="#achievements" class="hover:text-rose-600 transition duration-300">Prestasi</a></li>
+                <li><a href="#gallery" class="hover:text-rose-600 transition duration-300">Galeri</a></li>
+                <li><a href="#contact" class="hover:text-rose-600 transition duration-300">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-clip min-h-screen bg-gradient-animate flex items-center pt-20 relative">
+        <div class="container mx-auto px-6 z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <span class="inline-block px-4 py-1 bg-rose-600/20 border border-rose-600/50 text-rose-500 text-xs font-bold mb-6 tracking-[0.3em] rounded-full">
+                    SMAN 1 SUBANG • ATHLETE
+                </span>
+                <h1 class="text-7xl md:text-9xl font-black italic leading-[0.85] mb-6">
+                    FIGHT <br> <span class="text-rose-600">SMARTER.</span>
+                </h1>
+                <p class="text-slate-400 text-lg mb-8 max-w-md leading-relaxed">
+                    Menyeimbangkan disiplin akademik di <span class="text-white font-bold">SMAN 1 Subang</span> dengan dedikasi tinggi di atas ring Muay Thai. Melatih fisik, memperkuat mental.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#stats" class="bg-rose-600 text-white px-10 py-4 font-bold text-sm glow-hover transition-all rounded-sm italic">
+                        LIHAT DATA FISIK
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="floating relative z-10">
+                    <div class="absolute -inset-4 bg-rose-600 rounded-full blur-3xl opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?auto=format&fit=crop&q=80&w=600" alt="Nazril Kamil" class="relative rounded-2xl w-80 md:w-[450px] shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition duration-700">
+                </div>
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 right-0 text-rose-600/20 text-9xl font-black -z-0 select-none">MUAY</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistik Section -->
+    <section id="stats" class="py-32 bg-[#020617] relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="stat-label text-slate-400 text-xs block mb-2">Height</span>
+                    <h3 class="text-5xl font-bold italic">175<span class="text-sm">cm</span></h3>
+                </div>
+                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="stat-label text-slate-400 text-xs block mb-2">Weight</span>
+                    <h3 class="text-5xl font-bold italic">65<span class="text-sm">kg</span></h3>
+                </div>
+                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <span class="stat-label text-slate-400 text-xs block mb-2">Division</span>
+                    <h3 class="text-5xl font-bold italic text-3xl">Feather</h3>
+                </div>
+                <div class="glass p-8 rounded-2xl text-center stat-card" data-aos="fade-up" data-aos-delay="400">
+                    <span class="stat-label text-slate-400 text-xs block mb-2">Experience</span>
+                    <h3 class="text-5xl font-bold italic">3<span class="text-sm">yrs</span></h3>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-5xl font-bold mb-10 italic tracking-tighter text-rose-600">FIGHT ANALYTICS</h2>
+                    <div class="space-y-10">
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                                <span>Striking Power</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full bg-rose-600" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                                <span>Clinched Control</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full bg-rose-600" data-width="82%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="flex justify-between mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                                <span>Mental Fortitude</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full bg-rose-600" data-width="95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass p-12 rounded-3xl relative overflow-hidden group" data-aos="fade-left">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:rotate-12 transition duration-700">
+                        <i class="fas fa-graduation-cap text-8xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 italic uppercase">Pendidikan</h3>
+                    <p class="text-rose-500 font-bold text-xl mb-4">SMAN 1 SUBANG</p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Membuktikan bahwa prestasi olahraga dan tanggung jawab akademik dapat berjalan beriringan. Aktif sebagai mentor bela diri bagi adik-adik kelas di lingkungan sekolah dan sasana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prestasi Section -->
+    <section id="achievements" class="py-32 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-6xl font-black italic">BATTLE <span class="text-rose-600">RECORDS</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="100">
+                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2023</span>
+                    <h4 class="text-2xl font-bold mb-2 italic">KEJUARAAN DAERAH</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-rose-100">Juara 2 - Featherweight Category</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2023</span>
+                    <h4 class="text-2xl font-bold mb-2 italic">EXHIBITION MATCH</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-rose-100">Technical Performance Excellence</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass p-8 rounded-2xl hover:bg-rose-600 transition-all duration-500 group" data-aos="zoom-in" data-aos-delay="300">
+                    <span class="text-xs font-bold text-rose-500 group-hover:text-white mb-4 block tracking-widest">2024</span>
+                    <h4 class="text-2xl font-bold mb-2 italic">JUNIOR MENTOR</h4>
+                    <p class="text-sm text-slate-400 group-hover:text-rose-100">Certified Assistant Instructor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-32 bg-[#020617]">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1544117518-2b44c8cc2185?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
+                </div>
+                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1517438476312-10d79c67750d?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
+                </div>
+                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1599058917233-3583503c5888?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
+                </div>
+                <div class="overflow-hidden aspect-[3/4] group" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="contact" class="py-32 bg-gradient-to-b from-[#020617] to-black">
+        <div class="container mx-auto px-6 text-center">
+            <div class="glass max-w-4xl mx-auto p-16 rounded-[4rem] relative overflow-hidden" data-aos="zoom-in">
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-rose-600 blur-[100px] opacity-20"></div>
+                <h2 class="text-5xl font-black italic mb-6">MULAI <span class="text-rose-600">BERLATIH.</span></h2>
+                <p class="text-slate-400 mb-12 max-w-sm mx-auto">Konsultasi jadwal latihan junior atau kolaborasi prestasi.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-6 items-center">
+                    <a href="https://wa.me/your-number" class="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-rose-600 hover:text-white transition-all duration-300">
+                        <i class="fab fa-whatsapp text-xl"></i> WHATSAPP
+                    </a>
+                    <a href="https://instagram.com/your-username" class="flex items-center gap-3 glass px-8 py-4 rounded-full font-bold hover:bg-rose-600 transition-all duration-300">
+                        <i class="fab fa-instagram text-xl"></i> INSTAGRAM
+                    </a>
+                </div>
+                <div class="mt-12 text-slate-500 text-sm font-medium">
+                    nazril.kamil@sma1subang.sch.id
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 bg-black text-center">
+        <div class="text-2xl font-black italic mb-4">NZR<span class="text-rose-600">KAMIL</span></div>
+        <p class="text-slate-600 text-[10px] tracking-[0.5em] uppercase font-bold">
+            Athlete Digital Profile • SMAN 1 SUBANG • © 2024
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: false,
+            mirror: true
+        });
+
+        // Skill Bar Animation on Scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.progress-fill');
+                    fills.forEach(fill => {
+                        fill.style.width = fill.getAttribute('data-width');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(document.querySelector('#stats'));
+
+        // Header Transparency Change on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-black/90');
+                header.classList.remove('bg-white/10');
+            } else {
+                header.classList.remove('bg-black/90');
+                header.classList.add('bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>
